@@ -1,6 +1,5 @@
 public class AIPlayer extends AbstractPlayer {
 
-
     AIPlayer(Player playerID, Counter playerCounter) {
         super(playerID, playerCounter);
     }
