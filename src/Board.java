@@ -1,9 +1,10 @@
 public class Board {
 
     private Counter board[][];
+    private Player winner;
 
     public Board() {
-        board = new Counter[][]{
+        board = new Counter[][] {
                 {Counter.Null, Counter.Null, Counter.Null},
                 {Counter.Null, Counter.Null, Counter.Null},
                 {Counter.Null, Counter.Null, Counter.Null}};
@@ -19,6 +20,7 @@ public class Board {
         return output;
     }
 
+
     public void addMove(Counter counter, int row, int column) {
         if (isValidMove(row, column)) board[row][column] = counter;
         else throw new IllegalArgumentException("Invalid input");
@@ -28,7 +30,9 @@ public class Board {
         return (board[row][column].equals(Counter.Null));
     }
 
-    // check if there are any empty cells
+    public boolean isGameOver() {
+        return isWinner() || isDraw();
+    }
 
     public boolean isWinner() {
         if (isDiagonalWin()) return true;
@@ -40,8 +44,19 @@ public class Board {
     public boolean isDiagonalWin() {
         if (isEmpty()) return false;
 
-        return board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2]) ||
-                board[0][2].equals(board[1][1]) && board[1][1].equals(board[2][0]);
+        if (board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2]) ||
+                board[0][2].equals(board[1][1]) && board[1][1].equals(board[2][0])) {
+            setWinner(board[0][0]);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void setWinner(Counter counter) {
+        if (counter == Player.PLAYER_ONE.getCounter()) winner = Player.PLAYER_ONE;
+        else winner = Player.PLAYER_TWO;
+
     }
 
     private boolean isEmpty() {
@@ -69,6 +84,21 @@ public class Board {
                 if (board[0][column] == board[1][column] && board[1][column] == board[2][column]) return true;
         }
         return false;
+    }
+
+    public boolean isDraw() {
+        if (isWinner()) return false;
+
+        for (int row = 0; row < board.length; row++) {
+            for (int column = 0; column < board.length; column++) {
+                if (board[row][column] == Counter.Null) return false;
+            }
+        }
+        return true;
+    }
+
+    public Counter[][] getBoard() {
+        return this.board;
     }
 
 }

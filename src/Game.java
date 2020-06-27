@@ -21,7 +21,7 @@ public class Game {
     }
 
     private void play() {
-        while (!board.isWinner()){
+        while (!board.isGameOver()){
             activePlayer.takeTurn(board);
             displayBoard();
             switchPlayer();

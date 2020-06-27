@@ -5,12 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
-
-
-    @Test
-    void addMove() {
-    }
-
     @Test
     void isValidMove() {
     }
@@ -22,6 +16,8 @@ class BoardTest {
     @Test
     void testIsDiagonalWin() {
         Board board = new Board();
+        Assertions.assertFalse(board.isDiagonalWin());
+
         board.addMove(Counter.Nought, 0,0);
         board.addMove(Counter.Nought,1,1);
         board.addMove(Counter.Nought,2,2);
@@ -39,8 +35,6 @@ class BoardTest {
         board2.addMove(Counter.Nought, 2,0);
         Assertions.assertFalse(board2.isDiagonalWin());
 
-        Board board3 = new Board();
-        Assertions.assertFalse(board3.isDiagonalWin());
     }
 
     @Test
@@ -101,5 +95,22 @@ class BoardTest {
         board4.addMove(Counter.Cross, 2, 0);
         Assertions.assertFalse(board4.isRowWin());
     }
+
+    @Test
+    public void testAddMove() {
+        Board board = new Board();
+        board.addMove(Counter.Nought, 0,0);
+
+        Counter[][] boardWithNoughtInsertedTopRight;
+        boardWithNoughtInsertedTopRight = new Counter[][]{
+                {Counter.Nought, Counter.Null, Counter.Null},
+                {Counter.Null, Counter.Null, Counter.Null},
+                {Counter.Null, Counter.Null, Counter.Null}};
+
+        Assertions.assertArrayEquals(board.getBoard(), boardWithNoughtInsertedTopRight);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> board.addMove(Counter.Cross, 0 ,0 ));
+
+    }
+
 
 }
