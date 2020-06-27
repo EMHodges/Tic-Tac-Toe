@@ -21,4 +21,8 @@ public class Board {
         return output;
     }
 
+    public void addMove(Counter counter, int row, int column) {
+        board[row][column] = counter;
+    }
+
 }
