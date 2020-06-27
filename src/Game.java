@@ -23,10 +23,14 @@ public class Game {
     private void play() {
         while (!board.isWinner()){
             activePlayer.takeTurn(board);
-            System.out.print(board.toString());
+            displayBoard();
             switchPlayer();
         }
      }
+
+    private void displayBoard() {
+        System.out.print(board.toString());
+    }
 
 
     private void switchPlayer() {
