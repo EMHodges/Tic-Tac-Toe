@@ -1,7 +1,8 @@
 public enum Counter {
 
     Cross("X"),
-    Nought("O");
+    Nought("O"),
+    Null (" ");
 
     private String counterRepresentation;
 
@@ -12,5 +13,6 @@ public enum Counter {
     public String getCounterRepresentation() {
         return counterRepresentation;
     }
+
 }
 
