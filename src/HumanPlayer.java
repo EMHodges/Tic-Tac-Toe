@@ -6,13 +6,21 @@ public class HumanPlayer extends AbstractPlayer {
         super(playerID, playerCounter);
     }
 
+    // tidy this up a bit
     @Override
     public void takeTurn(Board board) {
-        int row = validateInput("row");
-        int column = validateInput("column");
+        int row;
+        int column;
+
+        do {
+            row = validateInput("row");
+            column = validateInput("column");
+        } while (!board.isValidMove(row, column));
+
         board.addMove(playerCounter, row, column);
     }
 
+    // Too much coupling here
     public int validateInput(String isle) {
         Scanner scanner = new Scanner(System.in);
         int location;
@@ -24,7 +32,7 @@ public class HumanPlayer extends AbstractPlayer {
                 scanner.next();
             }
             location = scanner.nextInt();
-        } while (location < 0 || location > 2);
+        } while ( (location < 0 || location > 2));
 
         return location;
 

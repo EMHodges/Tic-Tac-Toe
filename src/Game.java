@@ -21,7 +21,8 @@ public class Game {
 
     private void setup() {
         playerOne.takeTurn(board);
-        playerTwo.takeTurn(board);
+        System.out.println(board.toString());
+        playerOne.takeTurn(board);
         System.out.println(board.toString());
     }
 

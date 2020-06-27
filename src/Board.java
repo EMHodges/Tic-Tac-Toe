@@ -22,7 +22,13 @@ public class Board {
     }
 
     public void addMove(Counter counter, int row, int column) {
-        board[row][column] = counter;
+        if (isValidMove(row, column)) board[row][column] = counter;
+        else throw new IllegalArgumentException("Invalid input");
     }
+
+    public boolean isValidMove(int row, int column) {
+        return (board[row][column].equals(Counter.Null));
+    }
+
 
 }
